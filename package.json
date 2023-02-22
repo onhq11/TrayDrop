@@ -1,14 +1,14 @@
 {
   "dependencies": {
     "electron": "^23.1.0",
-    "path": "^0.12.7"
+    "electron-tray-window": "^1.2.7"
   },
   "name": "traydrop",
   "description": "",
   "version": "0.0.1",
   "main": "main.js",
-  "devDependencies": {},
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
