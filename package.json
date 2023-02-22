@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "electron": "^23.1.0",
+    "path": "^0.12.7"
+  },
+  "name": "traydrop",
+  "description": "",
+  "version": "0.0.1",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onhq11/TrayDrop.git"
+  },
+  "author": "onhq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onhq11/TrayDrop/issues"
+  },
+  "homepage": "https://github.com/onhq11/TrayDrop#readme"
+}
