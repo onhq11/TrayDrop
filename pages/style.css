@@ -1,0 +1,225 @@
+* {
+    transition: 0.5s;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #121212;
+}
+.fadeRedirect {
+    opacity: 0.0;
+}
+.formBox {
+    padding: 0 2vw;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+}
+.formTextField {
+    position: relative;
+    border-bottom: 1px solid #adadad;
+    transition: 0.5s;
+    cursor: pointer;
+    margin: 3vh auto;
+}
+.formTextField:hover {
+    border-color: #feb65e;
+}
+
+.formTextField:focus {
+    outline: none;
+    border-color: #feb65e;
+}
+.formText {
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    padding: 0 5px;
+    height: 4vh;
+    font-size: 1.6vh;
+    border: none;
+    background: none;
+    outline: none;
+}
+.formTextField label {
+    position: absolute;
+    top: 50%;
+    left: 0.25vw;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 1.6vh;
+    pointer-events: none;
+    transition: 0.5s;
+}
+.formTextField span::before {
+    content: '';
+    position: absolute;
+    top: 4vh;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #feb65e;
+    transition: 0.5s;
+}
+.formTextField input:focus ~ label,
+.formTextField input:valid ~ label {
+    top: -0.5vh;
+    color: #feb65e;
+}
+.formTextField input:focus ~ span::before,
+.formTextField input:valid ~ span::before {
+    width: 100%;
+}
+.submitBtn {
+    background-color: #feb65e;
+    border: 2px solid #feb65e;
+    border-radius: 10px;
+    padding: 7px;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    font-size: 1.4vh;
+    font-weight: 100;
+    outline: none;
+    margin: auto;
+    display: block;
+    margin-top: 2vh;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.8s;
+    width: 90%;
+    color: #292241;
+    transition: 0.3s;
+}
+.submitBtn:hover {
+    background-color: #feb65e;
+    border-color: #feb65e;
+}
+.submitBtn:active {
+    background-color: transparent;
+    border-color: #feb65e;
+    color: #feb65e;
+    transition: 0.2s;
+}
+.formHint {
+    text-align: center;
+    display: block;
+    margin: auto;
+    width: 100%;
+    cursor: pointer;
+    color: lightgray;
+    font-size: 1.5vh;
+    margin-bottom: 5vh;
+    transition: 0.5s;
+    margin-top: 5vh;
+}
+.formHint div {
+    color: lightgray;
+    transition: 0.2s;
+    display: inline;
+    text-decoration: underline;
+}
+.formHint div:hover {
+    color: #feb65e;
+}
+.loadingAnim {
+    display: inline-block;
+    position: absolute;
+    left: calc(50% - 17.5px);
+    width: 35px;
+    height: 35px;
+    opacity: 0.0;
+    z-index: -1;
+}
+.loadingAnim div {
+    position: absolute;
+    border: 2px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: loadingAnim 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loadingAnim div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+@keyframes loadingAnim {
+    0% {
+        top: 17px;
+        left: 17px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    4.9% {
+        top: 17px;
+        left: 17px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    5% {
+        top: 17px;
+        left: 17px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 34px;
+        height: 34px;
+        opacity: 0;
+    }
+}
+.centerBox {
+    position: absolute;
+    top: 15vh;
+    left: 50%;
+    width: 380px;
+    height: 70vh;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    background-color: #232323;
+    backdrop-filter: blur(5px);
+    transform: translateX(-50%);
+}
+.centerBox h1 {
+    text-align: center;
+    font-weight: 400;
+    color: #467fff;
+    padding-top: 2vh;
+    padding-bottom: 3.5vh;
+    border-bottom: 1px solid gray;
+}
+.popupBox {
+    font-family: 'Inter Tight';
+    width: 20vw;
+    height: 80px;
+    position: fixed;
+    z-index: 5;
+    top: 100%;
+    left: 99.5%;
+    transform: translate(-100%);
+    background-color: rgba(19, 11, 40, 0.3);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transition: 0.5s;
+}
+.popupText {
+    float: right;
+    width: 85%;
+    text-align: center;
+    position: absolute;
+    top: 49%;
+    left: 12%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #999;
+}
+.popupTimeBar {
+    position: absolute;
+    top: 100%;
+    height: 3px;
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.4);
+    transform: translateY(-100%);
+}
