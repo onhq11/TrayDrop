@@ -1,4 +1,4 @@
-const { BrowserWindow, Menu, Tray, clipboard, app, screen, shell } = require('electron')
+const { BrowserWindow, Menu, Tray, clipboard, app, screen, shell, Notification } = require('electron')
 const path = require('path')
 const Store = require('electron-store')
 const fs = require('fs')
@@ -115,6 +115,12 @@ app.on('ready', () => {
         toggleTray(false)
     })
 
+    win.webContents.on('page-favicon-updated', (event, favicon) => {
+        if(favicon.includes('https://pairdrop.net/images/favicon-96x96-notification.png')) {
+            toggleTray(true)
+        }
+    })
+
     if(store.get('firstConfig')) {
         let configWin = new BrowserWindow({
             width: 750,
@@ -203,6 +209,9 @@ const tryLogin = () => {
             reconfigure()
         }
     })
+    .catch(err => {
+        new Notification({ title: 'Network error', body: 'Cannot connect to TrayDrop server' }).show()
+    })
 }
 
 const syncClipboard = (forced) => {
@@ -230,6 +239,9 @@ const syncClipboard = (forced) => {
         copiedTextDate = response.date
 
         clipboard.writeText(response.result)
+    })
+    .catch(err => {
+        new Notification({ title: 'Network error', body: 'Cannot connect to TrayDrop server' }).show()
     })
 }
 
