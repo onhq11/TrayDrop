@@ -10,30 +10,31 @@
     <title>TrayDrop</title>
 </head>
 <body>
-    <div class="centerBox fadeRedirect">
-        <h1>Configuration</h1>
-        <form class="formBox" action="#">
-            <div class="formTextField">
-                <input type="text" class="formText" id="serverIP" required>
-                <span></span>
-                <label>Server address</label>
-            </div>
-            <!-- <div class="formTextField" style="display:none">
-                <input type="password" id="loginPassword" class="formText" required>
-                <span></span>
-                <label>Hasło</label>
-            </div> -->
-            <div class="loadingAnim"><div></div><div></div></div>
-            
-            <input type="submit" value="Test connection" class="submitBtn">
-            <div class="formHint">No server yet? <div onclick="window.open('https://github.com/onhq11/TrayDrop-Server')">Install now</div></div>
-            <div class="formHint">Or <div onclick="setCookie('clipboardSkipped', 'true')">Skip for now</div>
-        </form>
-    </div>
-    <!-- <div class="popupBox">
+    <main>
+        <div class="centerBox fadeRedirect">
+            <h1>Configuration</h1>
+            <form class="formBox" onsubmit="return false">
+                <div class="formTextField">
+                    <input type="text" class="formText" required>
+                    <span></span>
+                    <label>Server address</label>
+                </div>
+
+                <div class="loadingAnim"><div></div><div></div></div>
+                
+                <input type="submit" value="Test connection" class="submitBtn">
+                <div class="formHint">No server yet? <div onclick="window.open('https://github.com/onhq11/TrayDrop-Server')">Install now</div></div>
+                <div class="formHint">Or <div onclick="localStorage.setItem('clipboardSkipped', 'true'); configPhase = 3; loadingEnd(true)">Skip for now</div>
+            </form>
+        </div>
+    </main>
+    <div class="popupBox">
+        <div class="popupIcon">
+            <img src="img/popupCheck.svg">
+        </div>
         <div class="popupText"></div>
         <div class="popupTimeBar"></div>
-    </div> -->
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
