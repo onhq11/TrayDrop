@@ -60,6 +60,8 @@ let dim = {
     height: null
 }
 
+let errorNotify = 0
+
 app.on('ready', () => {
     if (app.dock) app.dock.hide()
 
@@ -242,6 +244,12 @@ const syncClipboard = (forced) => {
     })
     .catch(err => {
         new Notification({ title: 'Network error', body: 'Cannot connect to TrayDrop server' }).show()
+        errorNotify++
+
+        if(errorNotify == 3) {
+            syncBlocked = true
+            new Notification({ title: 'Clipboard service stopped', body: 'The service has been stopped due to problems with the connection to the server' }).show()
+        }
     })
 }
 
