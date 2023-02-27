@@ -22,7 +22,7 @@ TrayDrop is an open-source program that combines clipboard synchronization with 
 - Auto open the PairDrop window when file received
 
 ## Contributors
-The project needs contributors to test the application in terms of privacy, vulnerability and bugs. If so, feel free to [open an issue](https://github.com/onhq11/TrayDrop/issues) or [pull request](https://github.com/onhq11/TrayDrop/pulls) after reading the Contributing Guidelines
+The project needs contributors to test the application in terms of privacy, vulnerability and bugs. If so, feel free to [open an issue](https://github.com/onhq11/TrayDrop/issues) or [pull request](https://github.com/onhq11/TrayDrop/pulls) after reading the [Contributing Guidelines](https://github.com/onhq11/TrayDrop/blob/main/CONTRIBUTING.md)
 
 ## Authors
 - [@onhq11](https://github.com/onhq11)
