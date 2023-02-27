@@ -10,7 +10,7 @@ Clipboard sync and peer-to-peer file sharing to improve your PC-Phone ecosystem.
 
 </div><br><br>
 
-# 
+
 
 ## About
 TrayDrop is an open-source program that combines clipboard synchronization with fast peer-to-peer data transfer to improve the quaity of the pc-phone ecosystem. For peer-to-peer file transfer, the application uses the already existing [PairDrop](https://github.com/schlagmichdoch/PairDrop) service, and for the clipboard synchronization, its own [TrayDrop Server](https://github.com/onhq11/TrayDrop-Server), which is based on the MongoDB database.
