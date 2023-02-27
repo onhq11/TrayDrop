@@ -3,7 +3,20 @@
 }
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #121212;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: darkblue;
+}
+.background {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../img/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(40%) blur(4px);
 }
 .fadeRedirect {
     opacity: 0.0;
@@ -25,14 +38,15 @@ body {
     transition: 0.5s;
     cursor: pointer;
     margin: 30px auto;
+    font-size: 20px;
 }
 .formTextField:hover {
-    border-color: #feb65e;
+    border-color: rgba(42, 177, 207, 0.8);
 }
 
 .formTextField:focus {
     outline: none;
-    border-color: #feb65e;
+    border-color: rgba(42, 177, 207, 0.8);
 }
 .formText {
     cursor: pointer;
@@ -40,18 +54,19 @@ body {
     width: 100%;
     padding: 0 5px;
     height: 40px;
-    font-size: 16px;
+    font-size: 15.5px;
     border: none;
     background: none;
     outline: none;
 }
 .formTextField label {
     position: absolute;
-    top: 50%;
+    font-weight: bold;
+    top: 45%;
     left: 5px;
     color: #adadad;
     transform: translateY(-50%);
-    font-size: 15px;
+    font-size: 16px;
     pointer-events: none;
     transition: 0.5s;
 }
@@ -62,27 +77,26 @@ body {
     left: 0;
     width: 0%;
     height: 2px;
-    background: #feb65e;
+    background: rgba(42, 177, 207, 0.8);
     transition: 0.5s;
 }
 .formTextField input:focus ~ label,
 .formTextField input:valid ~ label {
-    top: -5px;
-    color: #feb65e;
+    top: -7px;
+    color: rgba(42, 177, 207, 0.8);
 }
 .formTextField input:focus ~ span::before,
 .formTextField input:valid ~ span::before {
     width: 100%;
 }
 .submitBtn {
-    background-color: #feb65e;
-    border: 2px solid #feb65e;
+    background-color: rgba(42, 177, 207, 0.8);
+    border: 2px solid rgba(42, 177, 207, 0.8);
     border-radius: 10px;
     padding: 7px;
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 14px;
-    font-weight: 100;
+    font-size: 14.4px;
     outline: none;
     margin: auto;
     display: block;
@@ -90,18 +104,19 @@ body {
     cursor: pointer;
     font-weight: bold;
     transition: 0.8s;
-    width: 90%;
+    width: 85%;
     color: #292241;
     transition: 0.3s;
+    height: 4.5vh;
 }
 .submitBtn:hover {
-    background-color: #feb65e;
-    border-color: #feb65e;
+    background-color: rgba(105, 221, 247, 0.8);
+    border-color: rgba(42, 177, 207, 0.8);
 }
 .submitBtn:active {
     background-color: transparent;
-    border-color: #feb65e;
-    color: #feb65e;
+    border-color: rgba(42, 177, 207, 0.8);
+    color: rgba(42, 177, 207, 0.8);
     transition: 0.2s;
 }
 .formHint {
@@ -122,7 +137,7 @@ body {
     text-decoration: underline;
 }
 .formHint div:hover {
-    color: #feb65e;
+    color: rgba(42, 177, 207, 0.8);
 }
 .loadingAnim {
     display: inline-block;
@@ -181,10 +196,13 @@ body {
     height: 70vh;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
-    background-color: #232323;
+    background-color: rgba(3, 12, 54, 0.8);
     backdrop-filter: blur(5px);
     transform: translateX(-50%);
     overflow: hidden;
+    -webkit-box-shadow: 0px 0px 46px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 46px 0px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 46px 0px rgba(0, 0, 0, 1);
 }
 .centerBox h1 {
     text-align: center;
@@ -196,14 +214,14 @@ body {
 }
 .popupBox {
     font-family: 'Inter Tight';
-    width: 20vw;
+    width: 400px;
     height: 80px;
     position: fixed;
     z-index: 5;
     top: 100%;
     left: 99.5%;
     transform: translate(-100%);
-    background-color: #232323;
+    background-color: rgba(3, 12, 54, 0.8);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     transition: 0.5s;
@@ -240,4 +258,28 @@ body {
     top: 50%;
     left: 60%;
     transform: translate(-50%, -50%);
+}
+.addonsTile {
+    height: 10vh;
+    width: 100%;
+    margin: 9% 0;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    line-height: 10vh;
+}
+.addonsTile:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.addonsTile:active {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.addonsTile h3 {
+    color: #aaa;
+    text-align: center;
+    font-size: 16px;
+}
+.addonsTile img {
+    display: inline;
+    margin-right: 30px;
 }

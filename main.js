@@ -18,6 +18,15 @@ const schema = {
     },
     hostname: {
         type: 'string'
+    },
+    hostnameMain: {
+        type: 'string'
+    },
+    hostnameAlt: {
+        type: 'string'
+    },
+    pairdropURL: {
+        type: 'string'
     }
 }
 const store = new Store({schema})
@@ -28,13 +37,20 @@ if(fileExists) {
     let config = fs.readFileSync('./config.json')
     let parsed = JSON.parse(config)
 
-    if(parsed.token && parsed.hostname && parsed.username) {
+    if(parsed.token != 'null' && parsed.hostnameMain != 'null' && parsed.username != 'null') {
         store.set('token', parsed.token)
         store.set('username', parsed.username)
-        store.set('hostname', parsed.hostname)
+        store.set('hostname', parsed.hostnameMain)
+        store.set('hostnameMain', parsed.hostnameMain)
+        store.set('hostnameAlt', parsed.hostnameAlt)
+        store.set('pairdropURL', parsed.pairdropURL)
         
         store.set('firstConfig', false)
         store.set('clipboardSync', true)
+
+        if(!store.get('pairdropURL').includes('//')) {
+            store.set('pairdropURL', 'https://pairdrop.net')
+        }
     } else {
         notConfigured = true
     }
@@ -46,6 +62,9 @@ if(notConfigured) {
     store.set('token', '')
     store.set('username', '')
     store.set('hostname', '')
+    store.set('hostnameMain', '')
+    store.set('hostnameAlt', '')
+    store.set('pairdropURL', '')
     
     store.set('firstConfig', true)
     store.set('clipboardSync', false)
@@ -54,7 +73,7 @@ if(notConfigured) {
 let copiedText = ''
 let copiedTextDate = ''
 let tray = null, win = null
-let trayVisible = false, syncBlocked = !store.get('clipboardSync')
+let trayVisible = false, syncBlocked = !store.get('clipboardSync'), hostnameChanged = false
 let dim = {
     width: null,
     height: null
@@ -112,7 +131,7 @@ app.on('ready', () => {
         }
     })
 
-    win.loadURL(`https://pairdrop.net`)
+    win.loadURL(store.get('pairdropURL'))
     win.on('blur', () => {
         toggleTray(false)
     })
@@ -121,6 +140,12 @@ app.on('ready', () => {
         if(favicon.includes('https://pairdrop.net/images/favicon-96x96-notification.png')) {
             toggleTray(true)
         }
+    })
+
+    win.webContents.on('media-started-playing', () => {
+        setTimeout(() => {
+            getConfigWin.webContents.executeJavaScript('document.querySelector("#receiveFileDialog > x-background > x-paper > div.row-reverse.space-between > button").click()', true)
+        }, 5000)
     })
 
     if(store.get('firstConfig')) {
@@ -180,13 +205,15 @@ const extractConfig = () => {
 
     getConfigWin.loadFile('pages/config.html')
 
-    getConfigWin.webContents.executeJavaScript('localStorage.getItem("hostname")+"{SEPARATOR}"+localStorage.getItem("username")+"{SEPARATOR}"+localStorage.getItem("token")', true)
+    getConfigWin.webContents.executeJavaScript('localStorage.getItem("username")+"{SEPARATOR}"+localStorage.getItem("token")+"{SEPARATOR}"+localStorage.getItem("hostnameMain")+"{SEPARATOR}"+localStorage.getItem("hostnameAlt")+"{SEPARATOR}"+localStorage.getItem("pairdropURL")', true)
     .then(result => {
         let config = result.split('{SEPARATOR}')
         let out = {
-            hostname: config[0],
-            username: config[1],
-            token: config[2]
+            username: config[0],
+            token: config[1],
+            hostnameMain: config[2],
+            hostnameAlt: config[3],
+            pairdropURL: config[4]
         }
 
         fs.writeFileSync('./config.json', JSON.stringify(out))
@@ -212,7 +239,17 @@ const tryLogin = () => {
         }
     })
     .catch(err => {
-        new Notification({ title: 'Network error', body: 'Cannot connect to TrayDrop server' }).show()
+        if(store.get('hostnameAlt') && !hostnameChanged) {
+            store.set('hostname', store.get('hostnameAlt'))
+            store.set('hostnameAlt', store.get('hostnameMain'))
+            store.set('hostnameMain', store.get('hostname'))
+
+            tryLogin()
+            errorNotify++
+        } else {
+            new Notification({ title: 'Network error', body: 'Cannot connect to TrayDrop server' }).show()
+            errorNotify++
+        }
     })
 }
 
@@ -243,10 +280,9 @@ const syncClipboard = (forced) => {
         clipboard.writeText(response.result)
     })
     .catch(err => {
-        new Notification({ title: 'Network error', body: 'Cannot connect to TrayDrop server' }).show()
         errorNotify++
 
-        if(errorNotify == 3) {
+        if(errorNotify >= 5) {
             syncBlocked = true
             new Notification({ title: 'Clipboard service stopped', body: 'The service has been stopped due to problems with the connection to the server' }).show()
         }
