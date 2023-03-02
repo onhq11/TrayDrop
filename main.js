@@ -102,7 +102,6 @@ app.on('ready', () => {
     const menu = Menu.buildFromTemplate([
         { label: 'Open Pairdrop', click() { toggleTray(true) } },
         { label: 'Force Clipboard Sync', click() { syncClipboard(true) } },
-        { label: 'Debug init', click() { store.set('firstConfig', false); store.set('clipboardSync', true); store.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9uaHEiLCJpYXQiOjE2NzcyNjQxNzF9.mjMGi_QqKJygZYlCvB-qxR5Qf3erBGqu9mAGSBV80QM'); store.set('username', 'onhq'); syncBlocked = false } },
         { type: 'separator' },
         { label: 'Options', type: 'submenu', submenu: [
             { label: 'Clipboard Auto Sync', type: 'checkbox', checked: true, click(item) { if(item.checked) { syncBlocked = false } else { syncBlocked = true } } },
