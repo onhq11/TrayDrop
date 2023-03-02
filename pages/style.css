@@ -26,6 +26,7 @@ body {
     box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
+    margin-top: 40px;
 }
 .formBox h2 {
     color: #adadad;
@@ -107,7 +108,7 @@ body {
     width: 85%;
     color: #292241;
     transition: 0.3s;
-    height: 4.5vh;
+    height: 40px;
 }
 .submitBtn:hover {
     background-color: rgba(105, 221, 247, 0.8);
